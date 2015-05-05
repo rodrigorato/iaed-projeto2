@@ -25,7 +25,7 @@ link_f new_fila_node(Chq cheque);
 fila* nova_fila();
 void insertCheck(fila* f,Chq cheque);
 int fila_vazia(fila* f);
-void tira_first(fila* f);
+Chq tira_first(fila* f);
 Chq search_and_destroy(fila* f, Ref ref);
 Chq search_fila(fila* f,Ref ref);
 
