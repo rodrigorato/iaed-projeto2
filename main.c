@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "dados.h"
 #include "cheques.h"
 #include "clientes.h"
 #include "lista.h"
