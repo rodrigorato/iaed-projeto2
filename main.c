@@ -25,6 +25,8 @@ short int command_aux(char command_str[]){
 	return strlen(command_str);
 }
 
+/* Coisas Globais */
+fila* Queue_chq = nova_fila();
 
 int main(){
 	//TO-DO: All the stuff lolol
@@ -45,7 +47,7 @@ int main(){
 						   criaReferencia(refe),
 						   criaReferencia(refb),
 						   criaReferencia(refc));
-				
+
 				break;
 
 			case 8:
