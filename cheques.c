@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
+#include "dados.h"
 #include "cheques.h"
+
 
 Chq criaCheque(Val valor, Ref ref_c, Ref ref_e, Ref ref_b){
 	Chq ChqPtr = malloc(sizeof(Cheque));

@@ -2,6 +2,7 @@
 #define DADOS_H
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef unsigned int Val;
 typedef unsigned long int Ref;
