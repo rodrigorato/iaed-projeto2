@@ -18,26 +18,35 @@ void info();
 void sair();
 
 
-int command_aux(char command_str[]){
+short int command_aux(char command_str[]){
 	int valor = strcmp(command_str,"sair");
 	if (valor == 0)
 		return 0;
 	return strlen(command_str);
 }
 
+/* Coisas Globais */
+fila* Queue_chq = nova_fila();
 
 int main(){
 	//TO-DO: All the stuff lolol
 	/* maior comando sera infocliente, que tem 11 caracteres + 1(null byte)*/
 	char command_str[12];
-	int commandval, valor, refe, refb, refc;
+	short int commandval;
+	unsigned int valor;
+	unsigned long int refe, refb, refc;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
 		switch(commandval){
 			case 6: 
 			/*cheque*/
-				scanf("%d %d %d %d",valor,refe,refb,refc);
+				scanf("%u %lu %lu %lu",&valor,&refe,&refb,&refc);
+				/*criaCheque vai devolver o apontador do novo cheque para ser posto na fila(tail)*/
+				criaCheque(criaValor(valor),
+						   criaReferencia(refe),
+						   criaReferencia(refb),
+						   criaReferencia(refc));
 
 				break;
 
