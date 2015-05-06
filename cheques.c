@@ -40,3 +40,7 @@ Ref refeCheque(Chq cheque){
 Ref refbCheque(Chq cheque){
 	return cheque->ref_b;
 }
+
+int chequeValido(Chq cheque){
+	return comparaReferencia(refcCheque(cheque), criaReferencia(-1));
+}

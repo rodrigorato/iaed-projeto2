@@ -25,6 +25,7 @@ void mudaNReceb(Cli cliente, int offset);
 void mudaValEmit(Cli cliente, Val offset);
 void mudaValReceb(Cli cliente, Val offset);
 void libertaCliente(Cli cliente);
+void imprimeCliente(Cli cliente);
 
 
 #endif /* CLIENTES_H */
