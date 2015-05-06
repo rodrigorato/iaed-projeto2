@@ -36,7 +36,7 @@ Chq tira_first(fila* f){
 	f->nche-=1;
 	return cheque;
 }
-/*APAGAR A MAIN*/
+
 Chq search_and_destroy(fila* f, Ref ref){
 	link_f temp=f->head,aux=NULL;
 	Chq c;
@@ -63,7 +63,18 @@ Chq search_fila(fila* f,Ref ref){
 	return c;
 }
 
-
-int main(){
-	return 0;
+int conta_cheques(fila* f){
+	return f->nche;
 }
+
+void apaga_fila(fila* f){
+	link_f temp=f->head;
+	for (;temp ;temp=temp->next){
+		free(f->head->check);
+		free(f->head);
+		f->head=temp->next;
+	}
+	free(f);
+}
+
+
