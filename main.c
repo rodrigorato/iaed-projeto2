@@ -30,34 +30,33 @@ fila* Queue_chq = nova_fila();
 arvore* Client_base = novaArvore();
 
 int main(){
-	//TO-DO: All the stuff lolol
+	/*TO-DO: All the stuff lolol*/
+	/*
 	/* maior comando sera infocliente, que tem 11 caracteres + 1(null byte)*/
 	char command_str[12];
 	short int commandval;
-	int valor;
-	long int refe, refb, refc;
+	Val valor;
+	Ref refc, refe, refb;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
 		switch(commandval){
 			case 6: 
 			/*cheque*/
-				scanf("%d %ld %ld %ld",&valor,&refe,&refb,&refc);
-				insertCheck( Queue_chq, criaCheque( criaValor(valor),
-							  			 			criaReferencia(refc),
-						   	  			 			criaReferencia(refe),
-						   	  			 			criaReferencia(refb));
+				valor = leValor();
+				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
+				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
 
-				if !(clienteValido( procuraElemento( criaReferencia(refe) )))
+				if !(clienteValido( procuraElemento( refe )))
 					/* se o cliente emissor nao existir, cria um cliente com essa referencia*/	
-					insereElemento(Client_base , criaCliente(criaReferencia(refe)));
+					insereElemento(Client_base , criaCliente(refe));
 
-				if !(clienteValido( procuraElemento( criaReferencia(refb) )))
+				if !(clienteValido( procuraElemento( refb )))
 					/* se o cliente benefeciente nao existir, cria um cliente com essa referencia*/	
-					insereElemento(Client_base , criaCliente(criaReferencia(refb)));
+					insereElemento(Client_base , criaCliente( refb ));
 
-				mudaEmit(procuraElemento( criaReferencia(refe)) , 1, criaValor(valor));
-				mudaReceb(procuraElemento( criaReferencia(refb)), 1, criaValor(valor));
+				mudaEmit(procuraElemento( refe ) , 1, valor);
+				mudaReceb(procuraElemento( refb ), 1, valor);
 				break;
 
 			case 8:
