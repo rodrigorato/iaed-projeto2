@@ -5,7 +5,7 @@
 #include "dados.h"
 #include "cheques.h"
 #include "clientes.h"
-#include "lista.h"
+#include "avl.h"
 #include "fila.h"
 
 
@@ -33,45 +33,59 @@ int main(){
 	/* maior comando sera infocliente, que tem 11 caracteres + 1(null byte)*/
 	char command_str[12];
 	short int commandval;
-	unsigned int valor;
-	unsigned long int refe, refb, refc;
+	int valor;
+	long int refe, refb, refc;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
 		switch(commandval){
 			case 6: 
 			/*cheque*/
-				scanf("%u %lu %lu %lu",&valor,&refe,&refb,&refc);
-				/*criaCheque vai devolver o apontador do novo cheque para ser posto na fila*/
-				/* tenho que criar o node ou nao? */
-				new_fila_node(criaCheque(criaValor(valor),
-							  			 criaReferencia(refe),
-						   	  			 criaReferencia(refb),
-						   	  			 criaReferencia(refc));
+				scanf("%d %ld %ld %ld",&valor,&refe,&refb,&refc);
+				insertCheck( Queue_chq, criaCheque( criaValor(valor),
+							  			 			criaReferencia(refc),
+						   	  			 			criaReferencia(refe),
+						   	  			 			criaReferencia(refb));
 
-				/* saber se cliente emissor e/ou benefeciente existem*/
-				/*caso existam , apenas somar os valores aos respectivos clientes*/
-				/* caso nao exista(m) cria-los*/
+				if !( /*procura cliente na arvore*/ criaReferencia(refe)){
+					/* se o cliente emissor nao existir, cria um cliente com essa referencia*/	
+					/*adiciona o cliente a arvore */criaCliente(criaReferencia(refe));
+				}
 
+				if !( /*procura cliente na arvore*/ criaReferencia(refb)){
+					/* se o cliente benefeciente nao existir, cria um cliente com essa referencia*/	
+					/* adiciona o cliente a arvore*/criaCliente(criaReferencia(refb));
+				}
+
+				mudaNEmit(/*procura na arvore o cliente*/criaReferencia(refe), 1);
+				mudaNReceb(/*procura na arvore o cliente*/criaReferencia(refb), 1);
+				mudaValEmit(/*procura na arvore o cliente*/criaReferencia(refb), criaValor(valor));
+				mudaValReceb(/*procura na arvore o cliente*/criaReferencia(refb), criaValor(valor));
 				break;
 
 			case 8:
 			/*processa*/
-				tira_first(Queue_chq);
+				if /*numero de cheques == 0, não há cheques para processar*/
+					printf("Nothing to process\t");
+				else
+					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
+					mudaNReceb(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
+					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
+					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
 				/* preciso de ir buscar os valores e ref do cheque devolvido*/
 				
 				break;
 
 			case 9:
 			/*processaR*/
-				scanf("%lu",&refc);
+				scanf("%ld",&refc);
 				search_and_destroy(Queue_chq, criaReferencia(refc));
 				/* preciso de ir buscar o valor e refs do cheque devolvido*/
 				break;
 
 			case 10:
 			/*infocheque*/
-				scanf("%lu",&refc);
+				scanf("%ld",&refc);
 				printf("Cheque-info: ");
 				escreveCheque(search_fila(Queue_chq, criaReferencia(refc)));
 				putchar('\t');
@@ -80,6 +94,7 @@ int main(){
 			case 11:
 			/*infocliente*/
 				scanf("%d",&refc); /*refc neste caso stands for referencia cliente*/
+				printf("Cheque-info: ");
 				/*falta funcao de escrita do cliente*/
 				criaReferencia(refc)
 
