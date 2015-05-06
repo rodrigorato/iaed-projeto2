@@ -54,6 +54,19 @@ void libertaCliente(Cli cliente){
 	free(cliente);
 }
 
+/*funcoes acrescentadas*/
+void mudaEmit(Cli cliente, int numero, Val offset){
+	(cliente->n_emit) += numero;
+	(cliente->val_emit) += offset;
+}
+
+void mudaReceb(Cli cliente, int numero, Val offset){
+	(cliente->n_receb) += numero;
+	(cliente->val_receb) += offset;
+}
+/*fim funcoes acrescentadas*/
+
+
 void imprimeCliente(Cli cliente){
 	escreveReferencia(referenciaCliente(cliente));
 	printf(" %d ", nemitCliente(cliente));

@@ -24,6 +24,12 @@ void mudaNEmit(Cli cliente, int offset);
 void mudaNReceb(Cli cliente, int offset);
 void mudaValEmit(Cli cliente, Val offset);
 void mudaValReceb(Cli cliente, Val offset);
+
+/*funcoes acrescentadas*/
+void mudaEmit(Cli cliente, int numero, Val offset);
+void mudaReceb(Cli cliente, int numero, Val offset);
+/*fim funcoes acrecentadas*/
+
 void libertaCliente(Cli cliente);
 void imprimeCliente(Cli cliente);
 
