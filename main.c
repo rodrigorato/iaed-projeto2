@@ -27,6 +27,7 @@ short int command_aux(char command_str[]){
 
 /* Coisas Globais */
 fila* Queue_chq = nova_fila();
+arvore* Client_base = novaArvore();
 
 int main(){
 	//TO-DO: All the stuff lolol
@@ -47,20 +48,16 @@ int main(){
 						   	  			 			criaReferencia(refe),
 						   	  			 			criaReferencia(refb));
 
-				if !( /*procura cliente na arvore*/ criaReferencia(refe)){
+				if !(clienteValido( procuraElemento( criaReferencia(refe) )))
 					/* se o cliente emissor nao existir, cria um cliente com essa referencia*/	
-					/*adiciona o cliente a arvore */criaCliente(criaReferencia(refe));
-				}
+					insereElemento(Client_base , criaCliente(criaReferencia(refe)));
 
-				if !( /*procura cliente na arvore*/ criaReferencia(refb)){
+				if !(clienteValido( procuraElemento( criaReferencia(refb) )))
 					/* se o cliente benefeciente nao existir, cria um cliente com essa referencia*/	
-					/* adiciona o cliente a arvore*/criaCliente(criaReferencia(refb));
-				}
+					insereElemento(Client_base , criaCliente(criaReferencia(refb)));
 
-				mudaNEmit(/*procura na arvore o cliente*/criaReferencia(refe), 1);
-				mudaNReceb(/*procura na arvore o cliente*/criaReferencia(refb), 1);
-				mudaValEmit(/*procura na arvore o cliente*/criaReferencia(refb), criaValor(valor));
-				mudaValReceb(/*procura na arvore o cliente*/criaReferencia(refb), criaValor(valor));
+				mudaEmit(procuraElemento( criaReferencia(refe)) , 1, criaValor(valor));
+				mudaReceb(procuraElemento( criaReferencia(refb)), 1, criaValor(valor));
 				break;
 
 			case 8:
@@ -68,10 +65,8 @@ int main(){
 				if /*numero de cheques == 0, não há cheques para processar*/
 					printf("Nothing to process\t");
 				else
-					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
-					mudaNReceb(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
-					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
-					mudaNEmit(/*procura cliente na arvore*/ refeCheque(tira_first(Queue_chq)), -1);
+				mudaEmit(/*procura na arvore o cliente*/criaReferencia(refe), -1, criaValor(valor));
+				mudaReceb(/*procura na arvore o cliente*/criaReferencia(refb), -1, criaValor(valor));
 				/* preciso de ir buscar os valores e ref do cheque devolvido*/
 				
 				break;
