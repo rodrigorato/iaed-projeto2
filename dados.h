@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef unsigned int Val;
-typedef unsigned long int Ref;
+typedef int Val;
+typedef long int Ref;
 
 /* Recebe um inteiro positivo e devolve um valor */
-Val criaValor(unsigned int valor);
+Val criaValor(int valor);
 
 /* Recebe um inteiro positivo e longo e devolve uma referencia */
-Ref criaReferencia(unsigned long int referencia);
+Ref criaReferencia(long int referencia);
 
 /* Recebe um valor e escreve-o para o std output */
 void escreveValor(Val valor);
