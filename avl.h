@@ -26,7 +26,8 @@ arvore* novaArvore();
 int numElementos(link h); 
 
 /* Devolve um ponteiro para o primeiro cliente que existe
-   na arvore cuja referencia e a dada. */
+   na arvore cuja referencia e a dada. Devolve o cliente invalido
+   caso nao exista. */
 Cli procuraElemento(link h, Ref referencia); 
 
 /* Devolve um ponteiro para o no da arvore
