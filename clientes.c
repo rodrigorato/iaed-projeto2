@@ -13,6 +13,27 @@ Cli criaCliente(Ref referencia){
 	return CliPtr;
 }
 
+
+Ref referenciaCliente(Cli cliente){
+	return cliente->referencia;
+}
+
+int nemitCliente(Cli cliente){
+	return cliente->n_emit;
+}
+
+int nrecebCliente(Cli cliente){
+	return cliente->n_receb;
+}
+
+Val valemitCliente(Cli cliente){
+	return cliente->val_emit;
+}
+
+Val valrecebCliente(Cli cliente){
+	return cliente->val_receb;
+}
+
 void mudaNEmit(Cli cliente, int offset){
 	(cliente->n_emit) += offset;
 }

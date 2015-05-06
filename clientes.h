@@ -15,6 +15,11 @@ typedef struct CLIENTE{
 typedef Cliente* Cli;
 
 Cli criaCliente(Ref referencia);
+Ref referenciaCliente(Cli cliente);
+int nemitCliente(Cli cliente);
+int nrecebCliente(Cli cliente);
+Val valemitCliente(Cli cliente);
+Val valrecebCliente(Cli cliente);
 void mudaNEmit(Cli cliente, int offset);
 void mudaNReceb(Cli cliente, int offset);
 void mudaValEmit(Cli cliente, Val offset);
