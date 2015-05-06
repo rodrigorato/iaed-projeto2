@@ -6,7 +6,6 @@
 #include "fila.h"
 
 
-link_f new_fila_node(Chq cheque);
 fila* nova_fila(){
 	fila * f = malloc(sizeof(fila));
 	f->head=NULL;
@@ -14,7 +13,7 @@ fila* nova_fila(){
 	return f;
 }
 void insertCheck(fila* f,Chq cheque){
-	link x = (link)malloc(sizeof(struct fila_node));
+	link_f x = (link_f)malloc(sizeof(struct fila_node));
 	x->check=cheque;
 	x->next=NULL;
 	if(!f->head) f->head=x;
@@ -32,5 +31,31 @@ Chq tira_first(fila* f){
 	f->head=temp;
 	return cheque;
 }
-Chq search_and_destroy(fila* f, Ref ref);
-Chq search_fila(fila* f,Ref ref);
+Chq search_and_destroy(fila* f, Ref ref){
+	link_f temp=f->head,aux=NULL;
+	Chq c;
+	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0);aux =temp,temp=temp->next);
+	if (!temp) c = criaCheque(0,-1,0,0);
+	else {
+		if (!aux) c=tira_first(f);
+		aux->next=temp->next;
+		c=temp->check;
+		if (!temp->next) f->tail=aux;
+	}
+	libertaCheque(temp->check);
+	free(temp);
+	return c;
+}
+Chq search_fila(fila* f,Ref ref){
+	link_f temp=f->head;
+	Chq c;
+	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0) ;temp=temp->next);
+	c = temp->check ;
+	libertaCheque(temp->check);
+	free(temp);
+	return c;
+}
+
+int main(){
+	return 0;
+}
