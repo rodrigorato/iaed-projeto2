@@ -30,7 +30,6 @@ Chq tira_first(fila* f){
 	Chq cheque = f->head->check;
 	link_f temp=f->head->next;
 	if (f->tail==f->head) f->tail=NULL;
-	libertaCheque(f->head->check);
 	free(f->head);
 	f->head=temp;
 	f->nche-=1;
@@ -49,7 +48,6 @@ Chq search_and_destroy(fila* f, Ref ref){
 		if (!temp->next) f->tail=aux;
 		f->nche-=1;
 	}
-	libertaCheque(temp->check);
 	free(temp);
 	return c;
 }
@@ -59,7 +57,6 @@ Chq search_fila(fila* f,Ref ref){
 	Chq c;
 	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0) ;temp=temp->next);
 	c = temp->check ;
-	libertaCheque(temp->check);
 	free(temp);
 	return c;
 }
