@@ -46,8 +46,8 @@ int chequeValido(Chq cheque){
 }
 
 void imprimeCheque(Chq cheque){
-	escreveReferencia(refcCheque(cheque)); putchar(" ");
-	escreveValor(valorCheque(cheque)); putchar(" ");
+	escreveReferencia(refcCheque(cheque)); putchar(' ');
+	escreveValor(valorCheque(cheque)); putchar(' ');
 	escreveReferencia(refeCheque(cheque)); printf(" --> ");
 	escreveReferencia(refbCheque(cheque));
 }
