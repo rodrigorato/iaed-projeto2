@@ -61,13 +61,16 @@ int main(){
 
 			case 8:
 			/*processa*/
-				if /*numero de cheques == 0, não há cheques para processar*/
-					printf("Nothing to process\t");
-				else
-				mudaEmit(/*procura na arvore o cliente*/criaReferencia(refe), -1, criaValor(valor));
-				mudaReceb(/*procura na arvore o cliente*/criaReferencia(refb), -1, criaValor(valor));
-				/* preciso de ir buscar os valores e ref do cheque devolvido*/
-				
+				if (fila_vazia(Queue_chq)) printf("Nothing to process\t");
+				else{
+					ch=tira_first(Queue_chq);/*falta declarar variaveis*/
+					cle=procuraElemento(Client_base, refeCheque(ch));
+					clb=procuraElemento(Client_base, refbCheque(ch));
+					mudaNEmit(cle, -1);
+					mudaValEmit(cle,-valorCheque(ch));
+					mudaNReceb(clb, -1);
+					mudaValReceb(clb,-valorCheque(ch));
+				}
 				break;
 
 			case 9:
