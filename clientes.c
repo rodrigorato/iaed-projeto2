@@ -64,6 +64,11 @@ void mudaReceb(Cli cliente, int numero, Val offset){
 	(cliente->n_receb) += numero;
 	(cliente->val_receb) += offset;
 }
+
+int clienteValido(Cli cliente){
+	return comparaReferencia( referenciaCliente(cliente), criaReferencia(-1));
+}
+
 /*fim funcoes acrescentadas*/
 
 

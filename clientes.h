@@ -28,6 +28,8 @@ void mudaValReceb(Cli cliente, Val offset);
 /*funcoes acrescentadas*/
 void mudaEmit(Cli cliente, int numero, Val offset);
 void mudaReceb(Cli cliente, int numero, Val offset);
+/*cliente Valido != 0 se for vaildo , ==0 se for invalido*/
+int clienteValido(Cli cliente);
 /*fim funcoes acrecentadas*/
 
 void libertaCliente(Cli cliente);
