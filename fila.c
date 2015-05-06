@@ -10,6 +10,7 @@ fila* nova_fila(){
 	fila * f = malloc(sizeof(fila));
 	f->head=NULL;
 	f->tail=NULL;
+	f->nche=0;
 	return f;
 }
 void insertCheck(fila* f,Chq cheque){
@@ -19,6 +20,7 @@ void insertCheck(fila* f,Chq cheque){
 	if(!f->head) f->head=x;
 	else f->tail->next=x;
 	f->tail=x;
+	f->nche+=1;
 }
 int fila_vazia(fila* f){
 	return (f->head==NULL);
@@ -27,20 +29,25 @@ int fila_vazia(fila* f){
 Chq tira_first(fila* f){
 	Chq cheque = f->head->check;
 	link_f temp=f->head->next;
+	if (f->tail==f->head) f->tail=NULL;
+	libertaCheque(f->head->check);
 	free(f->head);
 	f->head=temp;
+	f->nche-=1;
 	return cheque;
 }
+/*APAGAR A MAIN*/
 Chq search_and_destroy(fila* f, Ref ref){
 	link_f temp=f->head,aux=NULL;
 	Chq c;
 	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0);aux =temp,temp=temp->next);
 	if (!temp) c = criaCheque(0,-1,0,0);
 	else {
-		if (!aux) c=tira_first(f);
+		if (!aux) return tira_first(f);
 		aux->next=temp->next;
 		c=temp->check;
 		if (!temp->next) f->tail=aux;
+		f->nche-=1;
 	}
 	libertaCheque(temp->check);
 	free(temp);
@@ -55,6 +62,7 @@ Chq search_fila(fila* f,Ref ref){
 	free(temp);
 	return c;
 }
+
 
 int main(){
 	return 0;
