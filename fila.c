@@ -53,6 +53,7 @@ Chq search_and_destroy(fila* f, Ref ref){
 	free(temp);
 	return c;
 }
+
 Chq search_fila(fila* f,Ref ref){
 	link_f temp=f->head;
 	Chq c;
@@ -70,11 +71,9 @@ int conta_cheques(fila* f){
 void apaga_fila(fila* f){
 	link_f temp=f->head;
 	for (;temp ;temp=temp->next){
-		free(f->head->check);
+		libertaCheque(f->head->check);
 		free(f->head);
 		f->head=temp->next;
 	}
 	free(f);
 }
-
-
