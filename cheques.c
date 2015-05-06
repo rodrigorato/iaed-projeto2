@@ -24,3 +24,19 @@ void escreveCheque(Chq ch1){
 	escreveReferencia(ch1->ref_e); printf(" --> ");	
 	escreveReferencia(ch1->ref_b);
 }
+
+Val valorCheque(Chq cheque){
+	
+}
+
+Ref refcCheque(Chq cheque){
+
+}
+
+Ref refeCheque(Chq cheque){
+
+}
+
+Ref refbCheque(Chq cheque){
+	
+}
