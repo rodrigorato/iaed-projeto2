@@ -54,6 +54,10 @@ void libertaCliente(Cli cliente){
 	free(cliente);
 }
 
-int main(){
-	return 0;
+void imprimeCliente(Cli cliente){
+	escreveReferencia(referenciaCliente(cliente));
+	printf(" %d ", nemitCliente(cliente));
+	escreveValor(valemitCliente(cliente));
+	printf(" %d ", nrecebCliente(cliente));
+	escreveValor(valrecebCliente(cliente));
 }
