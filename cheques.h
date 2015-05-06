@@ -20,6 +20,7 @@ Ref refcCheque(Chq cheque);
 Ref refeCheque(Chq cheque);
 Ref refbCheque(Chq cheque);
 int chequeValido(Chq cheque); /* 0 se o cheque for invalido, qualquer outro valor em caso contrario */
+void imprimeCheque(Chq cheque);
 
 
 /* void escreveCheque(Chq ch1); - eventualmente useless */

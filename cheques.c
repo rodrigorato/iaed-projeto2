@@ -44,3 +44,10 @@ Ref refbCheque(Chq cheque){
 int chequeValido(Chq cheque){
 	return comparaReferencia(refcCheque(cheque), criaReferencia(-1));
 }
+
+void imprimeCheque(Chq cheque){
+	escreveReferencia(refcCheque(cheque)); putchar(" ");
+	escreveValor(valorCheque(cheque)); putchar(" ");
+	escreveReferencia(refeCheque(cheque)); printf(" --> ");
+	escreveReferencia(refbCheque(cheque));
+}
