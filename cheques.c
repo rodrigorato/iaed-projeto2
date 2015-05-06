@@ -26,17 +26,17 @@ void escreveCheque(Chq ch1){
 }
 
 Val valorCheque(Chq cheque){
-	
+	return cheque->valor;
 }
 
 Ref refcCheque(Chq cheque){
-
+	return cheque->ref_c;
 }
 
 Ref refeCheque(Chq cheque){
-
+	return cheque->ref_e;
 }
 
 Ref refbCheque(Chq cheque){
-	
+	return cheque->ref_b;
 }
