@@ -22,12 +22,15 @@ typedef struct {
 
 
 fila* nova_fila();
-void insertCheck(fila* f,Chq cheque);
-int fila_vazia(fila* f);
-Chq tira_first(fila* f);
-Chq search_and_destroy(fila* f, Ref ref);/*vai ser usado com o comando processaR,
+void insertCheck(fila* f,Chq cheque); /*comando: cheque*/
+int fila_vazia(fila* f); /*comando: processa*/
+Chq tira_first(fila* f); /*comando: processa*/ 
+Chq search_and_destroy(fila* f, Ref ref);/*comando: processaR,
                                           se nao encontrar devolve cheque invalido*/
-Chq search_fila(fila* f,Ref ref);/*vai ser usado com o comando infocheque*/
+Chq search_fila(fila* f,Ref ref);/*comando: infocheque*/
+int conta_cheques(fila* f);/*comando: sair*/
+void apaga_fila(fila* f); /*comando: sair*/
+
 
 
 
