@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cheques.h"
+#include "clientes.h"
 
 struct node{
-	Chq item;
+	Cli item;
 	struct node *l;
 	struct node *r;
 	int height;
@@ -23,17 +23,12 @@ typedef struct {
 arvore* novaArvore(); 
 
 /* Devolve o numero de elementos na arvore apontada por h */
-int numElementos(link h); 
+int numElementos(arvore* root); 
 
 /* Devolve um ponteiro para o primeiro cliente que existe
    na arvore cuja referencia e a dada. Devolve o cliente invalido
    caso nao exista. */
-Cli procuraElemento(link h, Ref referencia); 
-
-/* Devolve um ponteiro para o no da arvore
-   cuja referencia do cliente e a referencia dada.
-   Devolve NULL caso nao exista. */
-link procura(link h, Ref referencia);
+Cli procuraElemento(arvore* root, Ref referencia); 
 
 /* Insere o novo Cliente na arvore e devolve
    um apontador para a raiz da arvore. */
@@ -56,6 +51,8 @@ link novoNode(Cli cliente, link l, link r);
 
 /* As seguintes funcoes nao sao necessarias fora deste
    ficheiro - os comentarios estao no proprio codigo. */
+link max(link h);
+link min(link h)
 int height(link h);
 link rotR(link h);
 link rotL(link h);
@@ -65,6 +62,6 @@ int balance(link h);
 link AVLbalance(link h);
 link insertR(link h, Cli cliente);
 link deleteR(link h, Ref referencia);
-/* rotR, rotL? */
+link procura(link h, Ref referencia); /* Atencao com este gajo! */
 
 #endif /* AVL_H */
