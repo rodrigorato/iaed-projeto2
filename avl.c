@@ -173,7 +173,7 @@ link insertR(link h, Cli cliente){
 	/* Insere o cliente na arvore apontada por h
 	 * Equilibrando-a se necessario. */
 	if(h == NULL)
- 		return novoNode(cliente, NULL, NULL);
+ 		return novoNode(copiaCliente(cliente), NULL, NULL);
  	if(less(key(cliente), key(h->item)))
  		h->l = insertR(h->l, cliente);
  	else
@@ -243,7 +243,7 @@ void traverseInOrder(link h){
 	if (h == NULL)
  		return;
  	traverseInOrder(h->l);
- 	visit(h); putchar('\n');
+ 	putchar('*'); visit(h); putchar('\n');
  	traverseInOrder(h->r);
 }
 
@@ -274,18 +274,19 @@ int main(){
 	insereElemento(mytree, a);
 	insereElemento(mytree, b);
 
-	escreveClientesInorder(mytree);
+	escreveClientesInorder(mytree); printf("\n");
 
 	insereElemento(mytree, c);
 	insereElemento(mytree, d);
 	insereElemento(mytree, e);
 	
-	escreveClientesInorder(mytree);
-
-		
-
+	escreveClientesInorder(mytree); printf("\n");
 
 	libertaCliente(z); libertaCliente(a); libertaCliente(b); 
 	libertaCliente(c); libertaCliente(d); libertaCliente(e);
+
+	escreveClientesInorder(mytree); printf("\n");
+
+	cutdownArvore(mytree);
 	return 0;
 }
