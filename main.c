@@ -144,5 +144,7 @@ int main(){
 	printf("%d %d ",numElementos(Client_base),	conta_cheques(Queue_chq));
 	escreveValor(apaga_fila(Queue_chq));
 	putchar('\n');
+	cutdownArvore(Client_base);
+	apaga_fila(Queue_chq);
 	return 0;
 }
