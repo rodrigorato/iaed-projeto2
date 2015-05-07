@@ -47,19 +47,17 @@ int main(){
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
 				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
-				printf("1º print\n");
 				cle=procuraElemento(Client_base, refe);
 				clb=procuraElemento(Client_base, refb);
-				printf("antes dos ifs\n");
 				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
-				if (!clienteValido( cle)){
+				if (!clienteValido(cle)){
 					libertaCliente(cle);
 					cle=criaCliente(refe);
 					insereElemento(Client_base , cle);
 				}
-				if (!clienteValido( clb)){
+				if (!clienteValido(clb)){
 					libertaCliente(clb);
-					clb=criaCliente( refb );
+					clb=criaCliente(refb );
 					insereElemento(Client_base , clb);
 				}
 				mudaEmit(cle, 1, valor);
