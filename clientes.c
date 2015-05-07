@@ -13,6 +13,16 @@ Cli criaCliente(Ref referencia){
 	return CliPtr;
 }
 
+Cli copiaCliente(Cli cliente){
+	Cli copia = malloc(sizeof(Cliente));
+	copia->referencia = cliente->referencia;
+	copia->n_emit = cliente->n_emit;
+	copia->n_receb = cliente->n_receb;
+	copia->val_emit = cliente->val_emit;
+	copia->val_receb = cliente->val_receb;
+	return copia;
+}
+
 
 Ref referenciaCliente(Cli cliente){
 	return cliente->referencia;

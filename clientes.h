@@ -15,6 +15,7 @@ typedef struct CLIENTE{
 typedef Cliente* Cli;
 
 Cli criaCliente(Ref referencia);
+Cli copiaCliente(Cli cliente);
 Ref referenciaCliente(Cli cliente);
 int nemitCliente(Cli cliente);
 int nrecebCliente(Cli cliente);
