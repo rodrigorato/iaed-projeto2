@@ -13,16 +13,16 @@
 
 
 arvore* novaArvore(){
-	link root = malloc(sizeof(struct node));
-	arvore* final = malloc(sizeof(arvore));
-	root->l = root->r = NULL;
-	root->height = 0;
-	final->root = root;
-	return final;
+	arvore* mytree = malloc(sizeof(arvore));
+	mytree->root = NULL;
+	return mytree;
 }
 
 int numElementos(arvore* avltree){
-	return count(avltree->root);
+	if(avltree->root == NULL)
+		return 0;
+	else
+		return count(avltree->root);
 }
 
 Cli procuraElemento(arvore* avltree, Ref referencia){
@@ -247,5 +247,41 @@ void traverseInOrder(link h){
 
 int main(){
 	/* to-do: actual program lol */
+	arvore* mytree = novaArvore();
+	/* varname         ref  */
+	Cli z = criaCliente(0); 
+	Cli a = criaCliente(1); 
+	Cli b = criaCliente(22); 
+	Cli c = criaCliente(333); 
+	Cli d = criaCliente(4444); 
+	Cli e = criaCliente(55555); 
+	/*    n_emit, val_emit  n_receb  val_receb */
+	mudaEmit(z, 0, 0); mudaReceb(z, 0, 0);
+	mudaEmit(a, 1, 10); mudaReceb(a, 2, 20);
+	mudaEmit(b, 3, 30); mudaReceb(b, 4, 40);
+	mudaEmit(c, 5, 50); mudaReceb(c, 6, 60);
+	mudaEmit(d, 7, 70); mudaReceb(d, 8, 80);
+	mudaEmit(e, 9, 90); mudaReceb(e, 10, 100);
+
+
+	printf("Numero de elementos na arvore: (supposed to be 0)\n%d\n\n", numElementos(mytree));
+
+
+	insereElemento(mytree, z);
+	insereElemento(mytree, a);
+	insereElemento(mytree, b);
+
+
+	escreveClientesInorder(mytree);
+
+	insereElemento(mytree, c);
+	insereElemento(mytree, d);
+	insereElemento(mytree, e);
+
+		
+
+
+	libertaCliente(z); libertaCliente(a); libertaCliente(b); 
+	libertaCliente(c); libertaCliente(d); libertaCliente(e);
 	return 0;
 }
