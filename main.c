@@ -37,6 +37,8 @@ int main(){
 	short int commandval;
 	Val valor;
 	Ref refc, refe, refb;
+	Cli cle, clb;
+	Chq c;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
@@ -46,30 +48,30 @@ int main(){
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
 				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
+				cle=procuraElemento(Client_base, refe);
+				clb=procuraElemento(Client_base, refb);
 
-				if !(clienteValido( procuraElemento( refe )))
+				if !(clienteValido( cle))
 					/* se o cliente emissor nao existir, cria um cliente com essa referencia*/	
 					insereElemento(Client_base , criaCliente(refe));
 
-				if !(clienteValido( procuraElemento( refb )))
+				if !(clienteValido( clb))
 					/* se o cliente benefeciente nao existir, cria um cliente com essa referencia*/	
 					insereElemento(Client_base , criaCliente( refb ));
 
-				mudaEmit(procuraElemento( refe ) , 1, valor);
-				mudaReceb(procuraElemento( refb ), 1, valor);
+				mudaEmit(cle, 1, valor);
+				mudaReceb(clb, 1, valor);
 				break;
 
 			case 8:
 			/*processa*/
 				if (fila_vazia(Queue_chq)) printf("Nothing to process\t");
 				else{
-					ch=tira_first(Queue_chq);/*falta declarar variaveis*/
+					ch=tira_first(Queue_chq);
 					cle=procuraElemento(Client_base, refeCheque(ch));
 					clb=procuraElemento(Client_base, refbCheque(ch));
-					mudaNEmit(cle, -1);
-					mudaValEmit(cle,-valorCheque(ch));
-					mudaNReceb(clb, -1);
-					mudaValReceb(clb,-valorCheque(ch));
+					mudaEmit(cle,-1,-valorCheque(ch));
+					mudaReceb(clb,-1,-valorCheque(ch));
 				}
 				break;
 
