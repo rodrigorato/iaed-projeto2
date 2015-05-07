@@ -78,7 +78,7 @@ int main(){
 			case 9:
 			/*processaR*/
 				refc=leReferencia();
-				ch=search_and_destroy(Queue_chq, criaReferencia(refc));
+				ch=search_and_destroy(Queue_chq, refc);
 				if (!chequeValido(ch)){
 					printf("Cheque ");
 					escreveReferencia(refc);
