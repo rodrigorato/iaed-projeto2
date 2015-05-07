@@ -121,6 +121,7 @@ int main(){
 		scanf("%s",command_str);
 		commandval = command_aux(command_str);
 	}
-	/*imprime final*/
+	printf("%d %d ",numElementos(Client_base),	conta_cheques(Queue_chq));
+	escreveValor(apaga_fila(Queue_chq);
 	return 0;
 }
