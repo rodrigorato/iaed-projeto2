@@ -24,3 +24,8 @@ void escreveReferencia(Ref referencia){
 int comparaReferencia(Ref ref1, Ref ref2){
 	return ref1 - ref2;
 }
+
+Ref leReferencia(){
+	scanf("%ld",&ref);
+	return criaReferencia(ref);
+}
