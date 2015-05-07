@@ -51,10 +51,12 @@ int main(){
 				clb=procuraElemento(Client_base, refb);
 				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
 				if (!clienteValido( cle)){
+					libertaCliente(cle);
 					cle=criaCliente(refe);
 					insereElemento(Client_base , cle);
 				}
 				if (!clienteValido( clb)){
+					libertaCliente(clb);
 					clb=criaCliente( refb );
 					insereElemento(Client_base , clb);
 				}
@@ -67,10 +69,9 @@ int main(){
 				if (fila_vazia(Queue_chq)) printf("Nothing to process\n");
 				else{
 					ch=tira_first(Queue_chq);
-					cle=procuraElemento(Client_base, refeCheque(ch));
-					clb=procuraElemento(Client_base, refbCheque(ch));
-					mudaEmit(cle,-1,-valorCheque(ch));
-					mudaReceb(clb,-1,-valorCheque(ch));
+					mudaEmit(procuraElemento(Client_base, refeCheque(ch)),-1,-valorCheque(ch));
+					mudaReceb(procuraElemento(Client_base, refbCheque(ch)),-1,-valorCheque(ch));
+					libertaCheque(ch);
 				}
 				break;
 
@@ -79,15 +80,14 @@ int main(){
 				refc=leReferencia();
 				ch=search_and_destroy(Queue_chq, refc);
 				if (!chequeValido(ch)){
+					libertaCheque(ch);
 					printf("Cheque ");
 					escreveReferencia(refc);
 					printf(" does not exist\n");
 				}
 				else{
-					cle=procuraElemento(Client_base, refc);
-					clb=procuraElemento(Client_base, refc);
-					mudaEmit(cle,-1,-valorCheque(ch));
-					mudaReceb(clb,-1,-valorCheque(ch));
+					mudaEmit(procuraElemento(Client_base, refeCheque(ch)),-1,-valorCheque(ch));
+					mudaReceb(procuraElemento(Client_base, refbCheque(ch)),-1,-valorCheque(ch));
 				}
 				break;
 
