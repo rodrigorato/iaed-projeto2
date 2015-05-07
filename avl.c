@@ -173,7 +173,7 @@ link insertR(link h, Cli cliente){
 	/* Insere o cliente na arvore apontada por h
 	 * Equilibrando-a se necessario. */
 	if(h == NULL)
- 		return novoNode(copiaCliente(cliente), NULL, NULL);
+ 		return novoNode(cliente, NULL, NULL);
  	if(less(key(cliente), key(h->item)))
  		h->l = insertR(h->l, cliente);
  	else
