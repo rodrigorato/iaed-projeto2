@@ -37,6 +37,8 @@ int main(){
 	short int commandval;
 	Val valor;
 	Ref refc, refe, refb;
+	Cli cle, clb;
+	Chq c;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
@@ -45,39 +47,49 @@ int main(){
 			/*cheque*/
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
+				/*onde esta definida a leReferencia?*/
 				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
-
-				if !(clienteValido( procuraElemento( refe )))
-					/* se o cliente emissor nao existir, cria um cliente com essa referencia*/	
+				cle=procuraElemento(Client_base, refe);
+				clb=procuraElemento(Client_base, refb);
+				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
+				if !(clienteValido( cle))
 					insereElemento(Client_base , criaCliente(refe));
 
-				if !(clienteValido( procuraElemento( refb )))
-					/* se o cliente benefeciente nao existir, cria um cliente com essa referencia*/	
+				if !(clienteValido( clb))
 					insereElemento(Client_base , criaCliente( refb ));
 
-				mudaEmit(procuraElemento( refe ) , 1, valor);
-				mudaReceb(procuraElemento( refb ), 1, valor);
+				mudaEmit(cle, 1, valor);
+				mudaReceb(clb, 1, valor);
 				break;
 
 			case 8:
 			/*processa*/
-				if (fila_vazia(Queue_chq)) printf("Nothing to process\t");
+				if (fila_vazia(Queue_chq)) printf("Nothing to process\n");
 				else{
-					ch=tira_first(Queue_chq);/*falta declarar variaveis*/
+					ch=tira_first(Queue_chq);
 					cle=procuraElemento(Client_base, refeCheque(ch));
 					clb=procuraElemento(Client_base, refbCheque(ch));
-					mudaNEmit(cle, -1);
-					mudaValEmit(cle,-valorCheque(ch));
-					mudaNReceb(clb, -1);
-					mudaValReceb(clb,-valorCheque(ch));
+					mudaEmit(cle,-1,-valorCheque(ch));
+					mudaReceb(clb,-1,-valorCheque(ch));
 				}
 				break;
 
 			case 9:
 			/*processaR*/
-				scanf("%ld",&refc);
-				search_and_destroy(Queue_chq, criaReferencia(refc));
-				/* preciso de ir buscar o valor e refs do cheque devolvido*/
+				/*scanf("%ld",&refc);*/
+				refc=leReferencia();
+				ch=search_and_destroy(Queue_chq, criaReferencia(refc));
+				if (!chequeValido(ch)){
+					printf("Cheque ");
+					escreveReferencia(refc);
+					printf(" does not exist\n");
+				}
+				else{
+					cle=procuraElemento(Client_base, refc);
+					clb=procuraElemento(Client_base, refc);
+					mudaEmit(cle,-1,-valorCheque(ch));
+					mudaReceb(clb,-1,-valorCheque(ch));
+				}
 				break;
 
 			case 10:
