@@ -68,7 +68,7 @@ int main(){
 			/*processa*/
 				if (fila_vazia(Queue_chq)) printf("Nothing to process\n");
 				else{
-					ch=tira_first(Queue_chq);printf("coisas\n");
+					ch=tira_first(Queue_chq);
 					cle = procuraElemento(Client_base, refeCheque(ch));
 					clb = procuraElemento(Client_base, refbCheque(ch));
 					mudaEmit(cle,-1,-valorCheque(ch));
@@ -122,7 +122,7 @@ int main(){
 			case 11:
 			/*infocliente*/
 				refc=leReferencia();/*refc neste caso stands for referencia cliente*/
-				printf("Cheque-info: ");
+				printf("Cliente-info: ");
 				procuraElemento(Client_base,refc);
 				imprimeCliente(procuraElemento(Client_base,refc));
 				putchar('\n');
@@ -130,6 +130,7 @@ int main(){
 
 			case 4:
 			/*info*/
+				if (!numElementos(Client_base)) printf("No active clients\n");
 				escreveClientesInorder(Client_base);
 				break;
 
