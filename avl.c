@@ -27,7 +27,8 @@ int numElementos(arvore* avltree){
 
 Cli procuraElemento(arvore* avltree, Ref referencia){
 	link no_do_cliente = procura(avltree->root, referencia);
-	return (no_do_cliente->item == NULL) ? (criaCliente(criaReferencia(-1))) : (no_do_cliente->item);
+	printf("hello\n");
+	return (no_do_cliente == NULL) ? (criaCliente(criaReferencia(-1))) : (no_do_cliente->item);
 }
 
 void insereElemento(arvore* avltree, Cli cliente){
