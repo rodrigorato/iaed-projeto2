@@ -102,16 +102,16 @@ int main(){
 
 			case 11:
 			/*infocliente*/
-				scanf("%d",&refc); /*refc neste caso stands for referencia cliente*/
+				refc=leReferencia();/*refc neste caso stands for referencia cliente*/
 				printf("Cheque-info: ");
-				/*falta funcao de escrita do cliente*/
-				criaReferencia(refc)
-
+				procuraElemento(Client_base,refc);
+				imprimeCliente(procuraElemento(Client_base,refc));
+				putchar('\n');
 				break;
 
 			case 4:
 			/*info*/
-
+				escreveClientesInorder(Client_base);
 				break;
 
 			default:
@@ -122,6 +122,6 @@ int main(){
 		commandval = command_aux(command_str);
 	}
 	printf("%d %d ",numElementos(Client_base),	conta_cheques(Queue_chq));
-	escreveValor(apaga_fila(Queue_chq);
+	escreveValor(apaga_fila(Queue_chq));
 	return 0;
 }
