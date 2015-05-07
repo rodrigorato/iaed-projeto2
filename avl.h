@@ -23,36 +23,36 @@ typedef struct {
 arvore* novaArvore(); 
 
 /* Devolve o numero de elementos na arvore apontada por h */
-int numElementos(arvore* root); 
+int numElementos(arvore* avltree); 
 
 /* Devolve um ponteiro para o primeiro cliente que existe
    na arvore cuja referencia e a dada. Devolve o cliente invalido
    caso nao exista. */
-Cli procuraElemento(arvore* root, Ref referencia); 
+Cli procuraElemento(arvore* avltree, Ref referencia); 
 
-/* Insere o novo Cliente na arvore e devolve
-   um apontador para a raiz da arvore. */
-void insereElemento(link h, Cli cliente);
+/* Insere o novo Cliente na arvore. */
+void insereElemento(arvore* avltree, Cli cliente);
 
 /* Liberta a memoria associada ao cliente
    da arvore cuja referencia e a referencia dada- */
-void apagaElemento(link h, Ref referencia);
+void apagaElemento(arvore* avltree, Ref referencia);
 
 /* Liberta toda a memoria associada a arvore
-   cuja raiz e apontada por h. */
-void cutdownArvore(link h);
+   cuja raiz e apontada por h. 
+   NESTE MOMENTO ESTA A LIBERTAR A ARVORE TODA
+   NUNO? ISTO E PRECISO? */
+void cutdownArvore(arvore* avltree);
 
 /* Escreve no ecra todos os clientes na arvore 
    apontada por h no formato pedido. */
-void escreveClientesInorder(link h);
-
-/* Cria e devolve o novo node para as infos que recebe. */
-link novoNode(Cli cliente, link l, link r);
+void escreveClientesInorder(arvore* avltree);
 
 /* As seguintes funcoes nao sao necessarias fora deste
    ficheiro - os comentarios estao no proprio codigo. */
+link novoNode(Cli cliente, link l, link r);
 link max(link h);
-link min(link h)
+link min(link h);
+int count(link h);
 int height(link h);
 link rotR(link h);
 link rotL(link h);
@@ -63,5 +63,6 @@ link AVLbalance(link h);
 link insertR(link h, Cli cliente);
 link deleteR(link h, Ref referencia);
 link procura(link h, Ref referencia); /* Atencao com este gajo! */
+link freeR(link h);
 
 #endif /* AVL_H */

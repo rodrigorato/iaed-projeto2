@@ -7,6 +7,49 @@
 #define key(cliente) referenciaCliente(cliente)
 #define less(refa, refb) (comparaReferencia(refa, refb) < 0)
 #define eq(refa, refb) (comparaReferencia(refa, refb) == 0)
+#define deleteItem(it) libertaCliente(it)
+#define visit(cliente) imprimeCliente(cliente)
+
+arvore* novaArvore(){
+	link root = malloc(sizeof(struct node));
+	arvore* final = malloc(sizeof(arvore));
+	root->l = root->r = NULL;
+	root->height = 0;
+	arvore->root = root;
+	return arvore;
+}
+
+int numElementos(arvore* avltree){
+	return count(avltree->root);
+}
+
+Cli procuraElemento(arvore* avltree, Ref referencia){
+	link no_do_cliente = procura(avltree->root, referencia);
+	return no_do_cliente->item;
+}
+
+void insereElemento(arvore* avltree, Cli cliente){
+	link root_updated = insertR(avltree->root, cliente);
+	avltree->root = root_updated;
+}
+
+void apagaElemento(arvore* avltree, Ref referencia){
+	link root_updated = deleteR(avltree->root, referencia);
+	avltree->root = root_updated;
+}
+
+void cutdownArvore(arvore* avltree){
+	avltree->root = freeR(avltree->root);
+	free(avltree);
+}
+
+void escreveClientesInorder(arvore* avltree){
+	if (h == NULL)
+ 		return;
+ 	traverse(h->l);
+ 	visit(h); putchar('\n');
+ 	traverse(h->r);
+}
 
 link novoNode(Cli cliente, link l, link r){
 	link finalnode = (link)malloc(sizeof(struct node));
@@ -30,6 +73,13 @@ link min(link h){
  else 
  	return min(h->l);
 } 
+
+int count(link h){
+	if(h == NULL)
+		return 0;
+	else
+		return 1 + count(h->l) + count(h->r);
+}
 
 int height(link h){
 	/* Devolve a altura da arvore apontada por h */
@@ -178,4 +228,12 @@ link procura(link h, Ref referencia){
  		return procura(h->l, referencia);
  	else
  		return procura(h->r, referencia);
+}
+
+link freeR(link h){
+	if(h == NULL)
+		return h;
+	h->l=freeR(h->l);
+ 	h->r=freeR(h->r);
+ 	return deleteR(h,key(h->item));
 }
