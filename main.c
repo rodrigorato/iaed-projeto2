@@ -8,14 +8,14 @@
 #include "avl.h"
 #include "fila.h"
 
-
+/*
 void cria_cheque(valor, refe, refb, refc);
 void processsa();
 void processaR(int refc);
 void infocheque(int refc);
 void infocliente(int refc);
 void info();
-void sair();
+void sair();*/
 
 
 short int command_aux(char command_str[]){
@@ -25,13 +25,12 @@ short int command_aux(char command_str[]){
 	return strlen(command_str);
 }
 
-/* Coisas Globais */
-fila* Queue_chq = nova_fila();
-arvore* Client_base = novaArvore();
 
 int main(){
+	fila* Queue_chq = nova_fila();
+	arvore* Client_base = novaArvore();
 	/*TO-DO: All the stuff lolol*/
-	/*
+	
 	/* maior comando sera infocliente, que tem 11 caracteres + 1(null byte)*/
 	char command_str[12];
 	short int commandval;
@@ -51,11 +50,11 @@ int main(){
 				cle=procuraElemento(Client_base, refe);
 				clb=procuraElemento(Client_base, refb);
 				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
-				if !(clienteValido( cle)){
+				if (!clienteValido( cle)){
 					cle=criaCliente(refe);
 					insereElemento(Client_base , cle);
 				}
-				if !(clienteValido( clb)){
+				if (!clienteValido( clb)){
 					clb=criaCliente( refb );
 					insereElemento(Client_base , clb);
 				}
@@ -123,5 +122,6 @@ int main(){
 	}
 	printf("%d %d ",numElementos(Client_base),	conta_cheques(Queue_chq));
 	escreveValor(apaga_fila(Queue_chq));
+	putchar('\n');
 	return 0;
 }
