@@ -47,7 +47,6 @@ int main(){
 			/*cheque*/
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
-				/*onde esta definida a leReferencia?*/
 				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
 				cle=procuraElemento(Client_base, refe);
 				clb=procuraElemento(Client_base, refb);
@@ -76,7 +75,6 @@ int main(){
 
 			case 9:
 			/*processaR*/
-				/*scanf("%ld",&refc);*/
 				refc=leReferencia();
 				ch=search_and_destroy(Queue_chq, criaReferencia(refc));
 				if (!chequeValido(ch)){
@@ -94,10 +92,10 @@ int main(){
 
 			case 10:
 			/*infocheque*/
-				scanf("%ld",&refc);
+				refc=leReferencia();
 				printf("Cheque-info: ");
-				escreveCheque(search_fila(Queue_chq, criaReferencia(refc)));
-				putchar('\t');
+				imprimeCheque(search_fila(Queue_chq,refc));
+				putchar('\n');
 				break;
 
 			case 11:
