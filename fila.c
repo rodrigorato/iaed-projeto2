@@ -65,12 +65,15 @@ int conta_cheques(fila* f){
 	return f->nche;
 }
 
-void apaga_fila(fila* f){
+Val apaga_fila(fila* f){
 	link_f temp=f->head;
+	Val total=criaValor(0);
 	for (;temp ;temp=temp->next){
+		total += temp->check->valor;
 		libertaCheque(f->head->check);
 		free(f->head);
 		f->head=temp->next;
 	}
 	free(f);
+	return total;
 }
