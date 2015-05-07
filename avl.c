@@ -85,8 +85,8 @@ int height(link h){
 	return h->height;
 }
 
-link rotR(link h){
-	/* Rotacao simples a direita. */
+link rotL(link h){
+	/* Rotacao simples a esquerda. */
 	int height_left, height_right;
 
  	link x = h->r;
@@ -102,13 +102,14 @@ link rotR(link h){
  	return x;
 }
 
-link rotL(link h){
-	/* Rotacao simples a esquerda. */
+link rotR(link h){
+	/* Rotacao simples a direita. */
 	int height_left, height_right;
 
  	link x = h->l;
  	h->l = x->r;
  	x->r = h;
+
 
  	height_left = height(h->l); height_right = height(h->r);
  	h->height = height_left > height_right ? height_left + 1 : height_right + 1;
@@ -151,11 +152,13 @@ link AVLbalance(link h){
 			h = rotR(h);
 		else
 			h = rotLR(h);
+
 	}else if(balanceFactor < -1){
 		if(balance(h->r) < 0)
 			h = rotL(h);
 		else
 			h = rotRL(h);
+
 	}else {
 		int height_left = height(h->l); 
 		int height_right = height(h->r);
@@ -264,19 +267,20 @@ int main(){
 	mudaEmit(e, 9, 90); mudaReceb(e, 10, 100);
 
 
-	printf("Numero de elementos na arvore: (supposed to be 0)\n%d\n\n", numElementos(mytree));
+	printf("Numero de elementos na arvore: (supposed to be 0)\n%d\n", numElementos(mytree));
 
 
 	insereElemento(mytree, z);
 	insereElemento(mytree, a);
 	insereElemento(mytree, b);
 
-
 	escreveClientesInorder(mytree);
 
 	insereElemento(mytree, c);
 	insereElemento(mytree, d);
 	insereElemento(mytree, e);
+	
+	escreveClientesInorder(mytree);
 
 		
 
