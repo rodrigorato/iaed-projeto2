@@ -57,7 +57,6 @@ Chq search_fila(fila* f,Ref ref){
 	Chq c;
 	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0) ;temp=temp->next);
 	c = temp->check ;
-	free(temp);
 	return c;
 }
 

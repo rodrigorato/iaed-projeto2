@@ -68,7 +68,7 @@ int main(){
 			/*processa*/
 				if (fila_vazia(Queue_chq)) printf("Nothing to process\n");
 				else{
-					ch=tira_first(Queue_chq);
+					ch=tira_first(Queue_chq);printf("coisas\n");
 					cle = procuraElemento(Client_base, refeCheque(ch));
 					clb = procuraElemento(Client_base, refbCheque(ch));
 					mudaEmit(cle,-1,-valorCheque(ch));
@@ -134,7 +134,7 @@ int main(){
 				break;
 
 			default:
-				printf("ERRO - Comando invalido");
+				printf("ERRO - Comando invalido\n");
 				break;
 		}
 		scanf("%s",command_str);
