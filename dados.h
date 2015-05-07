@@ -25,4 +25,7 @@ void escreveReferencia(Ref referencia);
 		Um numero NEGATIVO se a ref1 < ref2; */
 int comparaReferencia(Ref ref1, Ref ref2);
 
+/*le o numero do std input e devolve a referencia*/
+Ref leReferencia();
+
 #endif /* DADOS_H */
