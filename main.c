@@ -51,12 +51,14 @@ int main(){
 				cle=procuraElemento(Client_base, refe);
 				clb=procuraElemento(Client_base, refb);
 				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
-				if !(clienteValido( cle))
-					insereElemento(Client_base , criaCliente(refe));
-
-				if !(clienteValido( clb))
-					insereElemento(Client_base , criaCliente( refb ));
-
+				if !(clienteValido( cle)){
+					cle=criaCliente(refe);
+					insereElemento(Client_base , cle);
+				}
+				if !(clienteValido( clb)){
+					clb=criaCliente( refb );
+					insereElemento(Client_base , clb);
+				}
 				mudaEmit(cle, 1, valor);
 				mudaReceb(clb, 1, valor);
 				break;
