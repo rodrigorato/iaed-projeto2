@@ -32,7 +32,8 @@ int numElementos(arvore* avltree);
    caso nao exista. */
 Cli procuraElemento(arvore* avltree, Ref referencia); 
 
-/* Insere o novo Cliente na arvore. */
+/* Insere o novo Cliente na arvore.
+    */
 void insereElemento(arvore* avltree, Cli cliente);
 
 /* Liberta a memoria associada ao cliente
