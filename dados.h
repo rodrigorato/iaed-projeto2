@@ -28,4 +28,7 @@ int comparaReferencia(Ref ref1, Ref ref2);
 /*le o numero do std input e devolve a referencia*/
 Ref leReferencia();
 
+/*le o numero do std input e devolve o valor*/
+Val leValor();
+
 #endif /* DADOS_H */

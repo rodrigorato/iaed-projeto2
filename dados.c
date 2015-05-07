@@ -26,6 +26,13 @@ int comparaReferencia(Ref ref1, Ref ref2){
 }
 
 Ref leReferencia(){
+	long int ref;
 	scanf("%ld",&ref);
 	return criaReferencia(ref);
+}
+
+Val leValor(){
+	int valor;
+	scanf("%d",&valor);
+	return criaValor(valor);
 }
