@@ -38,7 +38,7 @@ int main(){
 	Val valor;
 	Ref refc, refe, refb;
 	Cli cle, clb;
-	Chq c;
+	Chq ch;
 	scanf("%s",command_str);
 	commandval = command_aux(command_str);
 	while(commandval != 0){
