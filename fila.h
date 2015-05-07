@@ -29,7 +29,7 @@ Chq search_and_destroy(fila* f, Ref ref);/*comando: processaR,
                                           se nao encontrar devolve cheque invalido*/
 Chq search_fila(fila* f,Ref ref);/*comando: infocheque*/
 int conta_cheques(fila* f);/*comando: sair*/
-void apaga_fila(fila* f); /*comando: sair*/
+Val apaga_fila(fila* f); /*comando: sair, devolve o valor total de todos os cheques*/
 
 
 
