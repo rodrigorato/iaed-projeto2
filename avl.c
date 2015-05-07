@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "dados.h"
 #include "clientes.h"
 #include "avl.h"
 
@@ -8,15 +9,16 @@
 #define less(refa, refb) (comparaReferencia(refa, refb) < 0)
 #define eq(refa, refb) (comparaReferencia(refa, refb) == 0)
 #define deleteItem(it) libertaCliente(it)
-#define visit(cliente) imprimeCliente(cliente)
+#define visit(no) imprimeCliente(no->item)
+
 
 arvore* novaArvore(){
 	link root = malloc(sizeof(struct node));
 	arvore* final = malloc(sizeof(arvore));
 	root->l = root->r = NULL;
 	root->height = 0;
-	arvore->root = root;
-	return arvore;
+	final->root = root;
+	return final;
 }
 
 int numElementos(arvore* avltree){
@@ -44,11 +46,7 @@ void cutdownArvore(arvore* avltree){
 }
 
 void escreveClientesInorder(arvore* avltree){
-	if (h == NULL)
- 		return;
- 	traverse(h->l);
- 	visit(h); putchar('\n');
- 	traverse(h->r);
+	traverseInOrder(avltree->root);
 }
 
 link novoNode(Cli cliente, link l, link r){
@@ -172,7 +170,7 @@ link insertR(link h, Cli cliente){
 	/* Insere o cliente na arvore apontada por h
 	 * Equilibrando-a se necessario. */
 	if(h == NULL)
- 		return NEW(cliente, NULL, NULL);
+ 		return novoNode(cliente, NULL, NULL);
  	if(less(key(cliente), key(h->item)))
  		h->l = insertR(h->l, cliente);
  	else
@@ -196,7 +194,7 @@ link deleteR(link h, Ref referencia){
  		if(h->l !=NULL && h->r !=NULL){
  			link aux = max(h->l);
  			{	
- 				Item x; 
+ 				Cli x; 
  				x= h->item; 
  				h->item = aux->item; 
  				aux->item = x;
@@ -236,4 +234,18 @@ link freeR(link h){
 	h->l=freeR(h->l);
  	h->r=freeR(h->r);
  	return deleteR(h,key(h->item));
+}
+
+void traverseInOrder(link h){
+	if (h == NULL)
+ 		return;
+ 	traverseInOrder(h->l);
+ 	visit(h); putchar('\n');
+ 	traverseInOrder(h->r);
+}
+
+
+int main(){
+	/* to-do: actual program lol */
+	return 0;
 }

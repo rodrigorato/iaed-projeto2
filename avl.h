@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "dados.h"
 #include "clientes.h"
+
 
 struct node{
 	Cli item;
@@ -64,5 +66,6 @@ link insertR(link h, Cli cliente);
 link deleteR(link h, Ref referencia);
 link procura(link h, Ref referencia); /* Atencao com este gajo! */
 link freeR(link h);
+void traverseInOrder(link h);
 
 #endif /* AVL_H */
