@@ -79,8 +79,6 @@ int clienteValido(Cli cliente){
 	return comparaReferencia( referenciaCliente(cliente), criaReferencia(-1));
 }
 
-/*fim funcoes acrescentadas*/
-
 
 void imprimeCliente(Cli cliente){
 	escreveReferencia(referenciaCliente(cliente));
