@@ -64,7 +64,7 @@ int conta_cheques(fila* f){
 	return f->nche;
 }
 
-Val apaga_fila(fila* f){
+/*Val apaga_fila(fila* f){
 	link_f temp=f->head;
 	Val total=criaValor(0);
 	for (;temp ;temp=temp->next){
@@ -72,6 +72,18 @@ Val apaga_fila(fila* f){
 		libertaCheque(f->head->check);
 		free(f->head);
 		f->head=temp->next;
+	}
+	free(f);
+	return total;
+}	*/
+
+Val apaga_fila(fila* f){
+	Val total=criaValor(0);
+	Chq Cheque;
+	while (!fila_vazia(f)){
+		Cheque = tira_first(f);
+		total += valorCheque(Cheque);
+		libertaCheque(Cheque);
 	}
 	free(f);
 	return total;
