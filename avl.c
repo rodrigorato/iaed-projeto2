@@ -59,6 +59,8 @@ link novoNode(Cli cliente, link l, link r){
 }
 
 link max(link h){
+	/* Deolve o link onde esta o maior 
+	   elemento da arvore, caso exista. */
  if(h == NULL || h->r == NULL) 
  	return h;
  else 
@@ -66,6 +68,8 @@ link max(link h){
 }
 
 link min(link h){
+	/* Deolve o link onde esta o maior 
+	   elemento da arvore, caso exista. */
  if(h == NULL || h->l == NULL) 
  	return h;
  else 
@@ -73,6 +77,8 @@ link min(link h){
 } 
 
 int count(link h){
+	/* Devolve o numero de elementos na arvore
+	   cujo no "cabeca" e o apontado por h. */
 	if(h == NULL)
 		return 0;
 	else
@@ -80,7 +86,8 @@ int count(link h){
 }
 
 int height(link h){
-	/* Devolve a altura da arvore apontada por h */
+	/* Devolve a altura da arvore cujo 
+	   "no" cabeca e o apontado por h */
 	if(h == NULL) return 0;
 	return h->height;
 }
@@ -96,7 +103,6 @@ link rotL(link h){
  	height_left = height(h->l); height_right = height(h->r);
  	h->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
- 	/* height_left = height(h->l); height_right = height(x->r); */
  	height_left = height(x->l); height_right = height(x->r);
  	x->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
@@ -115,7 +121,6 @@ link rotR(link h){
  	height_left = height(h->l); height_right = height(h->r);
  	h->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
- 	/* height_left = height(x->l); height_right = height(h->r); */
  	height_left = height(x->l); height_right = height(x->r);
  	x->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
@@ -186,7 +191,7 @@ link insertR(link h, Cli cliente){
 }
 
 link deleteR(link h, Ref referencia){
-	/* Apaga o da arvore o primeiro no com o
+	/* Apaga da arvore o primeiro no com o
 	 * cliente que tem a referencia dada. */
 
 	if(h == NULL) 
@@ -223,6 +228,8 @@ link deleteR(link h, Ref referencia){
 }
 
 link procura(link h, Ref referencia){ 
+	/* Procura o cliente com a referencia dada
+	   na arvore. */
  	if(h == NULL)
  		return NULL;
  	if(eq(referencia, key(h->item)))
@@ -234,6 +241,7 @@ link procura(link h, Ref referencia){
 }
 
 link freeR(link h){
+	/* Apaga a arvore. */
 	if(h == NULL)
 		return h;
 	h->l=freeR(h->l);
@@ -242,6 +250,8 @@ link freeR(link h){
 }
 
 void traverseInOrder(link h){
+	/* Trata de "visitar" todos os clientes
+	   na arvore. */
 	if (h == NULL)
  		return;
  	traverseInOrder(h->l);
