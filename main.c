@@ -123,7 +123,6 @@ int main(){
 			/*infocliente*/
 				refc=leReferencia();/*refc neste caso stands for referencia cliente*/
 				printf("Cliente-info: ");
-				procuraElemento(Client_base,refc);
 				imprimeCliente(procuraElemento(Client_base,refc));
 				putchar('\n');
 				break;
