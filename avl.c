@@ -96,7 +96,8 @@ link rotL(link h){
  	height_left = height(h->l); height_right = height(h->r);
  	h->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
- 	height_left = height(h->l); height_right = height(x->r);
+ 	/* height_left = height(h->l); height_right = height(x->r); */
+ 	height_left = height(x->l); height_right = height(x->r);
  	x->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
  	return x;
@@ -114,7 +115,8 @@ link rotR(link h){
  	height_left = height(h->l); height_right = height(h->r);
  	h->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
- 	height_left = height(x->l); height_right = height(h->r);
+ 	/* height_left = height(x->l); height_right = height(h->r); */
+ 	height_left = height(x->l); height_right = height(x->r);
  	x->height = height_left > height_right ? height_left + 1 : height_right + 1;
 
  	return x; 

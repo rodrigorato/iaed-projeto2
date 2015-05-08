@@ -133,9 +133,6 @@ int main(){
 				escreveClientesInorder(Client_base);
 				break;
 
-			default:
-				printf("ERRO - Comando invalido\n");
-				break;
 		}
 		scanf("%s",command_str);
 		commandval = command_aux(command_str);
