@@ -46,22 +46,24 @@ int main(){
 			/*cheque*/
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
-				insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
-				cle=procuraElemento(Client_base, refe);
-				clb=procuraElemento(Client_base, refb);
-				/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
-				if (!clienteValido(cle)){
-					libertaCliente(cle);
-					cle=criaCliente(refe);
-					insereElemento(Client_base , cle);
+				if(comparaReferencia(refe, refb)){
+					insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
+					cle=procuraElemento(Client_base, refe);
+					clb=procuraElemento(Client_base, refb);
+					/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes*/
+					if (!clienteValido(cle)){
+						libertaCliente(cle);
+						cle=criaCliente(refe);
+						insereElemento(Client_base , cle);
+					}
+					if (!clienteValido(clb)){
+						libertaCliente(clb);
+						clb=criaCliente(refb );
+						insereElemento(Client_base , clb);
+					}
+					mudaEmit(cle, 1, valor);
+					mudaReceb(clb, 1, valor);
 				}
-				if (!clienteValido(clb)){
-					libertaCliente(clb);
-					clb=criaCliente(refb );
-					insereElemento(Client_base , clb);
-				}
-				mudaEmit(cle, 1, valor);
-				mudaReceb(clb, 1, valor);
 				break;
 
 			case 8:
