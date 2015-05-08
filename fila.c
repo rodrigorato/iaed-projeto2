@@ -40,7 +40,7 @@ Chq search_and_destroy(fila* f, Ref ref){
 	link_f temp=f->head,aux=NULL;
 	Chq c;
 	for (;temp && (comparaReferencia(refcCheque(temp->check),ref)!=0);aux =temp,temp=temp->next);
-	if (!temp) c = criaCheque(0,-1,0,0);
+	if (!temp) c = criaCheque(0,-1,0,0);/*se nao encontrar cria um cheque invalido*/
 	else {
 		if (!aux) return tira_first(f);
 		aux->next=temp->next;
