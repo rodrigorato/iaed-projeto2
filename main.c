@@ -145,6 +145,5 @@ int main(){
 	escreveValor(apaga_fila(Queue_chq));
 	putchar('\n');
 	cutdownArvore(Client_base);
-	apaga_fila(Queue_chq);
 	return 0;
 }
