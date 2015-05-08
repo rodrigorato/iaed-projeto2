@@ -5,4 +5,4 @@ Para compilar e correr:
 gcc -o proj2 *.c *.h -ansi -pedantic -Wall && ./proj2
 
 Para testar:
-gcc -o test *.c *.h -ansi -pedantic -Wall && mv test testes/test && bash testes/doit.sh
+Compilar com nome "test", copiar para a pasta testes e correr bash doit.sh.
