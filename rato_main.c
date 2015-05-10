@@ -11,17 +11,17 @@
 
 int comando(char* nome){
 	int i;
-	char *ops[] = ["cheque",		/* id = 0 */
+	char *ops[] = {"cheque",		/* id = 0 */
 				   "processa",		/* id = 1 */
 				   "processaR",		/* id = 2 */
 				   "infocheque",	/* id = 3 */
 				   "infocliente",	/* id = 4 */
 				   "info",			/* id = 5 */
-				   "sair"];			/* id = 6 */
+				   "sair"};			/* id = 6 */
 				   
 	for(i=0; i <= 6; i++)
 		if(!strcmp(nome, ops[i]))
-			return i
+			return i;
 			
 	return -1;	   					/* comando nao existe */
 }
