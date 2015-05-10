@@ -62,6 +62,7 @@ int main(){
 				printf("INVALIDO\n");
 				break;
 		}
+		scanf("%s", op);
 	}
 	
 	/* A realizar: sair */
