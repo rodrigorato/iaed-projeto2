@@ -65,7 +65,6 @@ int main(){
 	}
 	
 	/* A realizar: sair */
-	// codigo para sair aqui.
 	
 	return 0;
 }
