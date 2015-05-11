@@ -68,11 +68,10 @@ int main(){
 				insertCheck(cheques_queue, ch);
 
 				cle = procuraElemento(clientes_arvore, refe);
-				clb = procuraElemento(clientes_arvore, refb);
-				
 				if(!cle)
 					insereElemento(clientes_arvore, cle = criaCliente(refe));
 
+				clb = procuraElemento(clientes_arvore, refb);	
 				if(!clb)
 					insereElemento(clientes_arvore, clb = criaCliente(refb));
 
