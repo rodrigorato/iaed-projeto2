@@ -5,164 +5,139 @@
 #include "dados.h"
 #include "cheques.h"
 #include "clientes.h"
-#include "avl.h"
 #include "fila.h"
-
-/* Funcoes do programa e respectivas ordem de input
-void cria_cheque(valor, refe, refb, refc);
-void processsa();
-void processaR(int refc);
-void infocheque(int refc);
-void infocliente(int refc);
-void info();
-void sair();*/
+#include "avl.h"
 
 
-short int command_aux(char command_str[]){
-	/*funcao auxiliar ao menu que calcula o comprimento do comando
-	0 se for sair,se nao, tamanho do comando*/
-	int valor = strcmp(command_str,"sair");
-	if (valor == 0)
-		return 0;
-	return strlen(command_str);
+int comando(char* nome){
+	int i;
+	char *ops[] = {"cheque",		/* id = 0 */
+				   "processa",		/* id = 1 */
+				   "processaR",		/* id = 2 */
+				   "infocheque",	/* id = 3 */
+				   "infocliente",	/* id = 4 */
+				   "info",			/* id = 5 */
+				   "sair"};			/* id = 6 */
+				   
+	for(i=0; i <= 6; i++)
+		if(!strcmp(nome, ops[i]))
+			return i;
+			
+	return -1;	   					/* comando nao existe */
 }
 
+void processa_e_actualiza(arvore* clientes_arvore, Chq ch){
+	Cli cle, clb;
+
+	cle = procuraElemento(clientes_arvore, refeCheque(ch));
+	clb = procuraElemento(clientes_arvore, refbCheque(ch));
+					
+	mudaEmit(cle, -1, -valorCheque(ch));
+	mudaReceb(clb, -1, -valorCheque(ch));
+
+	if(nemitCliente(cle) == 0 && nrecebCliente(cle) == 0)
+		apagaElemento(clientes_arvore, referenciaCliente(cle));
+
+	if(nemitCliente(clb) == 0 && nrecebCliente(clb) == 0)
+		apagaElemento(clientes_arvore, referenciaCliente(clb));
+
+	libertaCheque(ch);
+}
 
 int main(){
-	/*criacao da fila e da arvore*/
-	fila* Queue_chq = nova_fila();
-	arvore* Client_base = novaArvore();
+	int cod;
+	char op[12];
 
-	/* maior comando sera infocliente, que tem 11 caracteres + 1(null byte)*/
-	/*decalracao das variaveis*/
-	char command_str[12];
-	short int commandval;
 	Val valor;
 	Ref refc, refe, refb;
 	Cli cle, clb;
 	Chq ch;
-	/*1a iteracao da decisao do comando*/
-	scanf("%s",command_str);
-	commandval = command_aux(command_str);
 
-	while(commandval != 0){
-		switch(commandval){
-			case 6: 
-			/*criar cheque, cheque <valor> <refemitente> <refbenefeciente> <refcheque>*/
+	fila* cheques_queue = nova_fila();
+	arvore* clientes_arvore = novaArvore();
+	
+	scanf("%s", op);
+	while((cod = comando(op)) != 6){
+		switch(cod){
+			case 0:
+				/* A realizar: cheque */
 				valor = leValor();
-				refe = leReferencia(); refb = leReferencia(), refc = leReferencia();
-				if(comparaReferencia(refe, refb)){
-					/*apenas cria o cheque se as referencias forem diferentes
-					caso nao especificado no enunciado. Nao imprime nada*/
-					insertCheck( Queue_chq, criaCheque( valor, refc, refe, refb));
-					cle=procuraElemento(Client_base, refe);
-					clb=procuraElemento(Client_base, refb);
-					/*se o cliente emissor ou benificiente nao existir, são criaddos novos clientes
-					os 1os sao libertos se forem invalidos(nao existirem)*/
-					if (!clienteValido(cle)){
-						libertaCliente(cle);
-						cle=criaCliente(refe);
-						insereElemento(Client_base , cle);
-					}
-					if (!clienteValido(clb)){
-						libertaCliente(clb);
-						clb=criaCliente(refb );
-						insereElemento(Client_base , clb);
-					}
-					/*certamente que existem, logo pode se alterar os seus valores*/
-					mudaEmit(cle, 1, valor);
-					mudaReceb(clb, 1, valor);
-				}
-				break;
+				refe = leReferencia(); refb = leReferencia(); refc = leReferencia();
+				ch = criaCheque(valor, refc, refe, refb);
 
-			case 8:
-			/*processa o 1o cheque da fila, processa*/
-				if (fila_vazia(Queue_chq)) printf("Nothing to process\n");
+				insertCheck(cheques_queue, ch);
+
+				cle = procuraElemento(clientes_arvore, refe);
+				clb = procuraElemento(clientes_arvore, refb);
+				
+				if(!cle)
+					insereElemento(clientes_arvore, cle = criaCliente(refe));
+
+				if(!clb)
+					insereElemento(clientes_arvore, clb = criaCliente(refb));
+
+				mudaEmit(cle, 1, valorCheque(ch)); 
+				mudaReceb(clb, 1, valorCheque(ch));
+				
+				break;
+			case 1:
+				/* A realizar: processa */
+				if(fila_vazia(cheques_queue))
+					printf("Nothing to process\n");
 				else{
-					/*retira o 1o da fila e guarda-o fazendo as respectivas mudancas aos
-					clientes, sendo que se um deles ficar com o numero de cheques emitidos
-					e numero de cheques que e benfactor, esse cliente e retirado da 
-					arvore*/
-					ch=tira_first(Queue_chq);
-					cle = procuraElemento(Client_base, refeCheque(ch));
-					clb = procuraElemento(Client_base, refbCheque(ch));
-					mudaEmit(cle,-1,-valorCheque(ch));
-					mudaReceb(clb,-1,-valorCheque(ch));
-					if( (!nemitCliente(cle)) && (!nrecebCliente(cle)) )
-						apagaElemento(Client_base, referenciaCliente(cle));
-
-					if( (!nemitCliente(clb)) && (!nrecebCliente(clb)) )
-						apagaElemento(Client_base, referenciaCliente(clb));
-
-					libertaCheque(ch);
+					ch = tira_first(cheques_queue);
+					processa_e_actualiza(clientes_arvore, ch);
 				}
+
 				break;
+			case 2:
+				/* A realizar: processaR */
+				refc = leReferencia();
+				ch = search_and_destroy(cheques_queue, refc);
 
-			case 9:
-			/*processa o cheque da referencia recebida, processaR <refcheque>*/
-				refc=leReferencia();
-				/*le a referencia e procura o cheque na fila retirando o logo*/
-				ch=search_and_destroy(Queue_chq, refc);
-				if (!chequeValido(ch)){
-					printf("Cheque ");
-					escreveReferencia(refc);
-					printf(" does not exist\n");
+				if(!ch){
+					printf("Cheque "); escreveReferencia(refc); printf(" does not exist\n");
 				}
-				else{
-					/*cheque existe, logo clientes existem e os seus valores podem
-					ser alterados. Se um dos clientes ficar com os numeros a zero
-					e apagado da base de clientes*/
-					cle = procuraElemento(Client_base, refeCheque(ch));
-					clb = procuraElemento(Client_base, refbCheque(ch));
+				else
+					processa_e_actualiza(clientes_arvore, ch);
 
-					mudaEmit(cle,-1,-valorCheque(ch));
-					mudaReceb(clb,-1,-valorCheque(ch));
-
-
-					if( (!nemitCliente(cle)) && (!nrecebCliente(cle)) )
-						apagaElemento(Client_base, referenciaCliente(cle));
-
-					if( (!nemitCliente(clb)) && (!nrecebCliente(clb)) )
-						apagaElemento(Client_base, referenciaCliente(clb));
-
-				}
-				libertaCheque(ch);
 				break;
-
-			case 10:
-			/*info cheque, infocheque <refcheque>*/
-				refc=leReferencia();
+			case 3:
+				/* A realizar: infocheque */
+				refc = leReferencia();
 				printf("Cheque-info: ");
-				/*procura o na fila e imprime o*/
-				imprimeCheque(search_fila(Queue_chq,refc));
-				putchar('\n');
-				break;
+				imprimeCheque(search_fila(cheques_queue, refc));
+				printf("\n");
 
-			case 11:
-			/*info cliente, infocliente <refcliente>*/
-				refc=leReferencia();
-				printf("Cliente-info: ");
-				/*procura o na base de clientes e imprime os seus valores*/
-				imprimeCliente(procuraElemento(Client_base,refc));
-				putchar('\n');
 				break;
-
 			case 4:
-			/*imprime os valores dos clientes ordenados ascendente de referencia
-			se nao existir clientes, imprime No active Clients, info*/
-				if (!numElementos(Client_base)) printf("No active clients\n");
-				else escreveClientesInorder(Client_base);
-				break;
+				/* A realizar: infocliente */
+				refe = leReferencia();
+				printf("Cliente-info: ");
+				imprimeCliente(procuraElemento(clientes_arvore, refe));
+				printf("\n");
 
+				break;
+			case 5:
+				/* A realizar: info */
+				if(numElementos(clientes_arvore) == 0)
+					printf("No active clients\n");
+				else
+					escreveClientesInorder(clientes_arvore);
+
+				break;
+			case -1:
+				/* A realizar: COMANDO INVALIDO */
+				printf("INVALIDO\n");
+				break;
 		}
-		scanf("%s",command_str);
-		commandval = command_aux(command_str);
+		scanf("%s", op);
 	}
-	/*ao sair, escreve o num de clientes, numero de cheques e o valor dos
-	cheques por processar. Apaga a fila e a arvore tambem*/
-	printf("%d %d ",numElementos(Client_base),	conta_cheques(Queue_chq));
-	escreveValor(apaga_fila(Queue_chq));
-	putchar('\n');
-	cutdownArvore(Client_base);
+	
+	/* A realizar: sair */
+	printf("%d %d ", numElementos(clientes_arvore), conta_cheques(cheques_queue));
+	escreveValor(apaga_fila(cheques_queue)); printf("\n");
+	cutdownArvore(clientes_arvore);
+
 	return 0;
 }
