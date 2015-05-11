@@ -18,13 +18,6 @@ void libertaCheque(Chq cheque){
 	free(cheque); 
 }
 
-void escreveCheque(Chq ch1){
-	escreveReferencia(ch1->ref_c); putchar(' ');
-	escreveValor(ch1->valor); putchar(' ');
-	escreveReferencia(ch1->ref_e); printf(" --> ");	
-	escreveReferencia(ch1->ref_b);
-}
-
 Val valorCheque(Chq cheque){
 	return cheque->valor;
 }
