@@ -76,7 +76,7 @@ void mudaReceb(Cli cliente, int numero, Val offset){
 }
 
 int clienteValido(Cli cliente){
-	return comparaReferencia( referenciaCliente(cliente), criaReferencia(-1));
+	return comparaReferencia(referenciaCliente(cliente), criaReferencia(-1));
 }
 
 
