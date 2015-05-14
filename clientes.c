@@ -44,21 +44,6 @@ Val valrecebCliente(Cli cliente){
 	return cliente->val_receb;
 }
 
-void mudaNEmit(Cli cliente, int offset){
-	(cliente->n_emit) += offset;
-}
-
-void mudaNReceb(Cli cliente, int offset){
-	(cliente->n_receb) += offset;
-}
-
-void mudaValEmit(Cli cliente, Val offset){
-	(cliente->val_emit) += offset;
-}
-
-void mudaValReceb(Cli cliente, Val offset){
-	(cliente->val_receb) += offset;
-}
 
 void libertaCliente(Cli cliente){
 	free(cliente);
@@ -73,10 +58,6 @@ void mudaEmit(Cli cliente, int numero, Val offset){
 void mudaReceb(Cli cliente, int numero, Val offset){
 	(cliente->n_receb) += numero;
 	(cliente->val_receb) += offset;
-}
-
-int clienteValido(Cli cliente){
-	return comparaReferencia(referenciaCliente(cliente), criaReferencia(-1));
 }
 
 

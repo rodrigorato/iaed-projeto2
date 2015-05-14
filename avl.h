@@ -28,8 +28,7 @@ arvore* novaArvore();
 int numElementos(arvore* avltree); 
 
 /* Procura na arvore um cliente com referencia igual
-   a que recebe. Caso nao exista devolve o cliente
-   invalido (referencia = -1). 
+   a que recebe. Caso nao exista devolve o ponteiro nulo
    E necessario libertar o cliente invalido mais tarde. */
 Cli procuraElemento(arvore* avltree, Ref referencia); 
 

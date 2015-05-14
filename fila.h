@@ -33,7 +33,7 @@ int fila_vazia(fila* f);
 Chq tira_first(fila* f); 
 
 /*recebe a fila e a referencia dum cheque, elimina o seu node e devolve o cheque,
-  se nao encontrar cheque com a referencia dada devolve cheque invalido. usada no comando 'processaR*/
+  se nao encontrar cheque com a referencia dada devolve o ponteiro nulo. usada no comando 'processaR*/
 Chq search_and_destroy(fila* f, Ref ref);
 
 /*recebe a fila e a referencia dum cheque, e devolve o cheque correspondente a essa referencia.

@@ -1,3 +1,10 @@
+/*	  Turno 9 - Grupo 9    *
+ *						   *
+ *	Alice Dourado   81205  *
+ *	Nuno Vieira		81098  *
+ *	Rodrigo Rato	81500  *
+ *						   */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +17,7 @@
 
 
 int comando(char* nome){
+	/* Determina qual o comando a executar */
 	int i;
 	char *ops[] = {"cheque",		/* id = 0 */
 				   "processa",		/* id = 1 */
@@ -27,6 +35,7 @@ int comando(char* nome){
 }
 
 void processa_e_actualiza(arvore* clientes_arvore, Chq ch){
+	/* Processa um determinado cheque */
 	Cli cle, clb;
 
 	cle = procuraElemento(clientes_arvore, refeCheque(ch));
@@ -60,7 +69,7 @@ int main(){
 	while((cod = comando(op)) != 6){
 		switch(cod){
 			case 0:
-				/* A realizar: cheque */
+				/* A realizar: cheque - adiciona um cheque a pool de cheques*/
 				valor = leValor();
 				refe = leReferencia(); refb = leReferencia(); refc = leReferencia();
 				ch = criaCheque(valor, refc, refe, refb);
@@ -80,7 +89,7 @@ int main(){
 				
 				break;
 			case 1:
-				/* A realizar: processa */
+				/* A realizar: processa - processa o cheque mais velho na pool */
 				if(fila_vazia(cheques_queue))
 					printf("Nothing to process\n");
 				else{
@@ -90,7 +99,7 @@ int main(){
 
 				break;
 			case 2:
-				/* A realizar: processaR */
+				/* A realizar: processaR - processa um cheque por referencia */
 				refc = leReferencia();
 				ch = search_and_destroy(cheques_queue, refc);
 
@@ -102,7 +111,7 @@ int main(){
 
 				break;
 			case 3:
-				/* A realizar: infocheque */
+				/* A realizar: infocheque - escreve a informacao de um determinado cheque */
 				refc = leReferencia();
 				printf("Cheque-info: ");
 				imprimeCheque(search_fila(cheques_queue, refc));
@@ -110,7 +119,7 @@ int main(){
 
 				break;
 			case 4:
-				/* A realizar: infocliente */
+				/* A realizar: infocliente - escreve a informacao de um determinado cliente */
 				refe = leReferencia();
 				printf("Cliente-info: ");
 				imprimeCliente(procuraElemento(clientes_arvore, refe));
@@ -118,7 +127,7 @@ int main(){
 
 				break;
 			case 5:
-				/* A realizar: info */
+				/* A realizar: info - escreve a informacao de todos os clientes no sistema */
 				if(numElementos(clientes_arvore) == 0)
 					printf("No active clients\n");
 				else
@@ -133,7 +142,7 @@ int main(){
 		scanf("%s", op);
 	}
 	
-	/* A realizar: sair */
+	/* A realizar: sair - escreve a informacao final e liberta toda a memoria associada */
 	printf("%d %d ", numElementos(clientes_arvore), conta_cheques(cheques_queue));
 	escreveValor(apaga_fila(cheques_queue)); printf("\n");
 	cutdownArvore(clientes_arvore);

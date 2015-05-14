@@ -34,10 +34,6 @@ Ref refbCheque(Chq cheque){
 	return cheque->ref_b;
 }
 
-int chequeValido(Chq cheque){
-	return comparaReferencia(refcCheque(cheque), criaReferencia(-1));
-}
-
 void imprimeCheque(Chq cheque){
 	escreveReferencia(refcCheque(cheque)); putchar(' ');
 	escreveValor(valorCheque(cheque)); putchar(' ');
